@@ -19,14 +19,19 @@ emailjs.init('e4IMeDjiTLqb2QzFb'); //Your EmailJS user ID
         var scheduledTime = new Date(time).getTime();
         var currentTime = new Date().getTime();
 
+        console.log("Scheduled Time " + scheduledTime);
+        console.log("Current Time " + currentTime);
+
         // Check if the scheduled time is in the future
-        if (scheduledTime <= currentTime) {
+        if (scheduledTime < currentTime) {
             alert('Please select a future time for sending the email.');
             return;
         }
 
         // Calculate the delay until the scheduled time
         var delay = scheduledTime - currentTime;
+
+        console.log("Delay " + delay);
 
         // Schedule email sending after the specified delay
         setTimeout(function () {
