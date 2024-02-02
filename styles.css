@@ -40,9 +40,10 @@ button {
 }
 
 button {
-    background-color: #007bff;
+    background-color: orange;
     color: #fff;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 button:hover {
