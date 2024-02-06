@@ -15,9 +15,20 @@
             <label for="time">Scheduled Time:</label>
             <input type="datetime-local" id="time" required>
             
-            <button type="submit">Send Email</button>
+            <button class="sendEmail" type="submit">Send Email</button>
         </form>
     </div>
+
+    <div>
+    <button class="show-modal">Show Example</button>
+
+    <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <p>This is where the dad joke will go!</p>
+    </div>
+    <div class="overlay hidden"></div>
+    </div>
+
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="./script.js"></script>
 </body>
