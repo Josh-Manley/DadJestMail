@@ -29,6 +29,8 @@ label {
 }
 
 input[type="email"],
+input[type="recipient"],
+input[type="sender"],
 input[type="time"],
 .sendEmail {
     width: 100%;

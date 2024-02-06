@@ -10,8 +10,15 @@
     <div class="container">
         <h1>Dad Joke Scheduler</h1>
         <form id="emailForm">
+            <label for="recipient">Recipient:</label>
+            <input type="recipient" required>
+
+            <label for="email">Sender:</label>
+            <input type="sender" required>
+
             <label for="email">Email:</label>
             <input type="email" id="email" required>
+            
             <label for="time">Scheduled Time:</label>
             <input type="datetime-local" id="time" required>
             
