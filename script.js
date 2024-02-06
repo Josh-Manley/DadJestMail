@@ -66,11 +66,25 @@ async function fetchDadJokeAndSendEmail(email) {
 
         var joke = data.joke;
 
+        addJokeToLocalStorage(joke);
+
         // Send email with the dad joke content
         sendEmail(email, joke);
     } catch (error) {
         console.error('Error fetching dad joke:', error);
     }
+}
+
+function addJokeToLocalStorage(joke) {
+    var jokes = JSON.parse(localStorage.getItem('dadJokes')) || [];
+
+    jokes.push(joke);
+
+    if (jokes.length > 5) {
+        jokes = jokes.slice(jokes.length - 5);
+    }
+
+    localStorage.setItem('dadJokes', JSON.stringify(jokes));
 }
 
 function sendEmail(email, joke) {
