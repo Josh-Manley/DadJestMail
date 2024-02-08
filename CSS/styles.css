@@ -104,13 +104,13 @@ input:invalid {
     border-color: #ff0000;
 }
 
-<<<<<<< HEAD:styles.css
+
 #time{
   border-radius: 5px;
   padding: 10px;
   border-color: #53526D;
+}
 
-=======
 .past-jokes-btn {
   font-size: 2rem;
   font-weight: 600;
@@ -121,7 +121,6 @@ input:invalid {
   color: #444;
   border-radius: 10rem;
   cursor: pointer;
->>>>>>> f129193e029003a7e1d3b5b5cb5f369007453b75:CSS/styles.css
 }
 
 .show-modal {
