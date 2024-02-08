@@ -8,6 +8,13 @@ html {
     padding: 0;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
 
 body {
   font-family: "octin-college", sans-serif;
