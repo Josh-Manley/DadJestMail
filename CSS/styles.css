@@ -56,6 +56,18 @@ input:invalid {
     border-color: #ff0000;
 }
 
+.past-jokes-btn {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1.75rem 3.5rem;
+  margin: 5rem 2rem;
+  border: none;
+  background-color: #fff;
+  color: #444;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+
 .show-modal {
     font-size: 2rem;
     font-weight: 600;

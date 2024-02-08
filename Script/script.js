@@ -84,12 +84,23 @@ async function fetchDadJokeAndSendEmail(email) {
 
 // Beginning: Add joke to local storage
 function addJokeToLocalStorage(joke) {
+    
     var jokes = JSON.parse(localStorage.getItem('dadJokes')) || [];
 
-    jokes.push(joke);
+    // Add the current date along with the joke
+    
+    var currentDate = moment().format("MMM Do YYYY")
+    var formattedDate = currentDate // Adjust the date format as needed
 
-    if (jokes.length > 5) {
-        jokes = jokes.slice(jokes.length - 5);
+    var jokeObject = {
+        date: formattedDate,
+        content: joke,
+    };
+
+    jokes.push(jokeObject);
+
+    if (jokes.length > 20) {
+        jokes = jokes.slice(jokes.length - 20);
     }
 
     localStorage.setItem('dadJokes', JSON.stringify(jokes));
@@ -165,3 +176,5 @@ btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
 // End: Modal functionality
+
+const ratingStars = [...document.getElementsByClassName("rating__star")];
