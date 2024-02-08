@@ -17,12 +17,15 @@ body {
 }
 
 img {
-  height: 20%;
+  width: 20%;
 
 }
 
 .dad-jokes{
     background-color: #918FC0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container {
@@ -56,7 +59,7 @@ form {
       margin: auto;
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       position: relative;
-      margin-top: -150px;
+      margin-top: 50px;
 }
 
 label {
@@ -104,13 +107,13 @@ input:invalid {
     border-color: #ff0000;
 }
 
-<<<<<<< HEAD:styles.css
+
 #time{
   border-radius: 5px;
   padding: 10px;
   border-color: #53526D;
+}
 
-=======
 .past-jokes-btn {
   font-size: 2rem;
   font-weight: 600;
@@ -121,7 +124,6 @@ input:invalid {
   color: #444;
   border-radius: 10rem;
   cursor: pointer;
->>>>>>> f129193e029003a7e1d3b5b5cb5f369007453b75:CSS/styles.css
 }
 
 .show-modal {
