@@ -4,25 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dad Joke Scheduler</title>
+<<<<<<< HEAD
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.typekit.net/oaa8vzq.css">
+    <link rel="stylesheet" href="styles.css">
+=======
     <link rel="stylesheet" href="./CSS/styles.css">
+>>>>>>> f129193e029003a7e1d3b5b5cb5f369007453b75
 </head>
 <body>
+<div class="dad-jokes">
+    <div><img src="./Assets/dad-joke-scheduler-header.png"  alt="dad joke scheduler"></div>
     <div class="container">
-        <h1>Dad Joke Scheduler</h1>
-        <form id="emailForm">
-            <label for="recipient">Recipient:</label>
-            <input type="recipient" required>
+            <form id="emailForm">
+                <div class="field">
+                    <h2>Send a Dad Joke to someone you Love!</h2>
+                    <label for="recipient">Recipient:</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="text" placeholder="Text input" value="">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </div>
 
+        <div class="field">
             <label for="email">Sender:</label>
-            <input type="sender" required>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input is-success" type="text" placeholder="Text input" value="">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+                <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            
+            <div class="field">
+                <div class="control has-icons-left has-icons-right">
+                    <label for="email">Email:</label>
+                    <input class="input is-danger" type="email" placeholder="Email input" value="">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                </div>
+                <p class="help is-danger">This email is invalid</p>
+            </div>
+            <div>
             <label for="time">Scheduled Time:</label>
             <input type="datetime-local" id="time" required>
-            
-            <button class="sendEmail" type="submit">Send Email</button>
+            </div>
+            <div id="button">
+            <button class="sendEmail" type="submit">SEND DAD JOKE</button>
+            </div>
         </form>
     </div>
 
@@ -36,11 +75,15 @@
     </div>
     <div class="overlay hidden"></div>
     </div>
+<<<<<<< HEAD
+</div>
+=======
 
     <a href="./next-page.html">
         <button class="past-jokes-btn">Past Jokes</button>
     </a>
     
+>>>>>>> f129193e029003a7e1d3b5b5cb5f369007453b75
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="module" src="./Script/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js" integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
