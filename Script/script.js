@@ -81,6 +81,39 @@ async function fetchDadJokeAndSendEmail(email) {
 }
 // End: Fetch a random dad joke and initiate addJokeToLocalStorage & sendEmail functions
 
+document.addEventListener('DOMContentLoaded', function () {
+    fetchAndDisplayRandomJokes(10);
+});
+
+async function fetchAndDisplayRandomJokes(numJokes) {
+    try {
+        var jokesContainer = document.getElementById('jokesContainer');
+
+        for (let i = 0; i < numJokes; i++) {
+            // Fetch a random dad joke from the icanhazdadjoke API
+            var response = await fetch('https://icanhazdadjoke.com/', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            var data = await response.json();
+            var joke = data.joke;
+
+            // Add joke to local storage (optional)
+            addJokeToLocalStorage(joke);
+
+            // Create a new paragraph element to display the joke
+            var jokeParagraph = document.createElement('p');
+            jokeParagraph.textContent = joke;
+
+            // Append the joke paragraph to the container
+    
+        }
+    } catch (error) {
+        console.error('Error fetching dad joke:', error);
+    }
+}
 
 // Beginning: Add joke to local storage
 function addJokeToLocalStorage(joke) {
