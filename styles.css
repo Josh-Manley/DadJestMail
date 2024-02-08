@@ -1,31 +1,67 @@
-body {
-    font-family: Arial, sans-serif;
+html {
+  background-color: #918FC0;
+}
+
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+}
+
+
+body {
+  font-family: "octin-college", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  background-color: #918FC0;
+}
+
+img {
+  height: 20%;
+
+}
+
+.dad-jokes{
+    background-color: #918FC0;
 }
 
 .container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-style: solid;
+  color: #53526D;
+  justify-content: center;
+  align-items: center;
+
 }
 
-h1 {
-    text-align: center;
+.field h2 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.control.has-icons-left .input,
+.control.has-icons-left .select select {
+  padding-left: 10px;
 }
 
 form {
-    margin-top: 20px;
+    border: 2px solid #556B30;
+      background-color: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 600px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin: auto;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      position: relative;
+      margin-top: -150px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-top: 20px;
 }
 
 input[type="email"],
@@ -41,11 +77,23 @@ input[type="time"],
     box-sizing: border-box;
 }
 
+.input.input.is-success {
+border-color: #53526D;
+}
+
 .sendEmail {
-    background-color: orange;
+    background-color: #53526D;
     color: #fff;
     cursor: pointer;
-    margin-top: 20px;
+    font-family: "octin-college", sans-serif;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    width: 260px;
+    margin-top: 50px;
+}
+
+#button{
+  text-align: center;
 }
 
 button:hover {
@@ -54,6 +102,13 @@ button:hover {
 
 input:invalid {
     border-color: #ff0000;
+}
+
+#time{
+  border-radius: 5px;
+  padding: 10px;
+  border-color: #53526D;
+
 }
 
 .show-modal {
