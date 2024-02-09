@@ -25,6 +25,10 @@ form.addEventListener('submit', function (event) {
     var now = new Date();
     var currentTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes()).getTime();
 
+    console.log(currentTime)
+    console.log(scheduledTime)
+
+
     // Check if the scheduled time is in the past, if so, present alert
     if (scheduledTime < currentTime) {
         alert('Please select a current or future time for sending the email.');
@@ -160,53 +164,46 @@ function sendEmail(email, joke) {
 
 
 // Beginning: Modal functionality
-var modal = document.querySelector('.modal');
-var overlay = document.querySelector('.overlay');
-var btnCloseModal = document.querySelector('.close-modal');
-var btnOpenModal = document.querySelector('.show-modal');
-
-// When "Show Example" button is clicked, remove class "hidden" from relevant elements and initiate fetchDadJoke function
-var openModal = function () {
-    modal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
-    fetchDadJoke();
-};
-
-// Fetch random dad joke, add it to local storage, and display it in the modal
-async function fetchDadJoke() {
-    try {
-        // Fetch a random dad joke from the icanhazdadjoke API
-        var response = await fetch('https://icanhazdadjoke.com/', {
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
-        var data = await response.json();
-        var joke = data.joke;
-
-        // Add joke to local storage
-        addJokeToLocalStorage(joke);
-
-        // Display joke in modal
-        var example = document.querySelector('.exampleDadJoke');
-        example.textContent = joke;
-
-    } catch (error) {
-        console.error('Error fetching dad joke:', error);
+    // Functions to open and close a modal
+    function openModal($el) {
+      $el.classList.add('is-active');
     }
-};
-
-// When "X" button is clicked or user clicks outside of modal, add class "hidden" to relevant elements
-var closeModal = function () {
-    modal.classList.add('hidden');
-    overlay.classList.add('hidden');
-};
-
-// Click listeners specific to modal functionality
-btnOpenModal.addEventListener('click', openModal);
-btnCloseModal.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
+  
+    function closeModal($el) {
+      $el.classList.remove('is-active');
+    }
+  
+    // function closeAllModals() {
+    //   (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+    //     closeModal($modal);
+    //   });
+    // }
+  
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+      const modal = $trigger.dataset.target;
+      const $target = document.getElementById(modal);
+  
+      $trigger.addEventListener('click', () => {
+        openModal($target);
+      });
+    });
+  
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+  
+      $close.addEventListener('click', () => {
+        closeModal($target);
+      });
+    });
+  
+    // // Add a keyboard event to close all modals
+    // document.addEventListener('keydown', (event) => {
+    //   if(e.key === "Escape") {
+    //     closeAllModals();
+    //   }
+    // });
 
 // End: Modal functionality
 
