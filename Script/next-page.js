@@ -183,7 +183,7 @@ function displayFavoriteJokes(jokeArray) {
 
   favorite.forEach((favJoke, index) => {
     const li = document.createElement('li');
-    li.innerHTML = `${favJoke.date} <br> ${jokeArray}`;
+    li.innerHTML = `${favJoke}`;
     favoriteList.appendChild(li);
   });
 }
