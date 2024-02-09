@@ -22,6 +22,11 @@
     width: 20%;
   }
 
+  h2 {
+    font-size: 25px;
+    color: #ffffff;
+  }
+
   /* .flex-column {
     display: flex;
     flex-direction: column;
