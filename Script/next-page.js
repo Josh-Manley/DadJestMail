@@ -1,83 +1,131 @@
 // Add function to ensure DOM is fully loaded
-
+document.addEventListener('DOMContentLoaded', function () {
+  fetchAndDisplayRandomJokes(10);
+});
 // fetchAndDisplayRandomJokes
 // addJokeToLocalStorage
 
-let jokeList = document.getElementById('joke-list');
-let jokes = JSON.parse(localStorage.getItem('dadJokes'));
 let favorite = [];
 let favContainer = document.getElementById('fav-container');
 let fav = document.getElementById('fav');
-console.log(jokes);
+let jokeList = document.getElementById('joke-list');
+let jokes = JSON.parse(localStorage.getItem('dadJokes'));
+let jokeArray = []
 
-const ratingStars = [...document.getElementsByClassName(".rating__star")];
+async function fetchAndDisplayRandomJokes(numJokes) {
+  try {
+      // var jokesContainer = document.getElementById('jokesContainer');
 
-for (let i = 0; i < jokes.length; i++) {
-  let li = document.createElement('li');
-  li.setAttribute('joke', jokes[i].content);
-  // li.innerHTML = `${jokes[i].date} <br> ${jokes[i].content}`;
+      for (let i = 0; i < numJokes; i++) {
+          // Fetch a random dad joke from the icanhazdadjoke API
+          var response = await fetch('https://icanhazdadjoke.com/', {
+              headers: {
+                  'Accept': 'application/json'
+              }
+          })
+         
+          var data = await response.json();
+          var joke = data.joke;
+          console.log(joke)
+          
+          jokeArray.push(joke);
+        }
+          console.log(jokeArray)
+          
+          for (let i = 0; i < jokeArray.length; i++) {
+            let li = document.createElement('li');
+            li.setAttribute('joke', jokeArray[i].content);
+            // li.innerHTML = `${jokes[i].date} <br> ${jokes[i].content}`;
+          
+            let jokeDate = document.createElement('h6');
+            jokeDate.textContent = joke[i].date;
+            li.append(jokeDate);
+          
+            let jokeText = document.createElement('p');
+            jokeText.textContent = jokeArray[i];
+            li.append(jokeText);
+          
+            // Dynamically create favorite buttons
+            let buttonFav = document.createElement('button');
+            buttonFav.innerText = 'Add to Favorites';
+            buttonFav.setAttribute('id', `fav-btn-${i}`);
+            buttonFav.addEventListener('click', () =>
+              addFavorite(i))
+          
+            // li.appendChild(buttonFav);
+          
+            // Dynamically create send email buttons
+            let buttonEmail = document.createElement('button');
+            buttonEmail.innerText = 'Send Joke as Email';
+            buttonEmail.setAttribute('id', `email-btn-${i}`);
+            buttonEmail.setAttribute('class', 'email-btn js-modal-trigger');
+            buttonEmail.setAttribute('data-target', 'modal-js-example');
+          
+            // Wrap buttons in a div for styling
+            let buttonsDiv = document.createElement('div');
+            buttonsDiv.style.display = 'flex'; // Use Flexbox
+            buttonsDiv.style.gap = '10px'; // Optional: adds space between buttons
+          
+            buttonsDiv.appendChild(buttonFav);
+            buttonsDiv.appendChild(buttonEmail);
+          
+            // Append the div containing both buttons to the li
+            li.appendChild(buttonsDiv);
+          
+            // Create a div for the star rating and add it to the li
+            let starRatingDiv = document.createElement('div');
+            starRatingDiv.classList.add('rating');
+          
+            // Create a new set of five stars for each li
+            for (let j = 0; j < 5; j++) {
+              let star = document.createElement('i');
+              star.classList.add('rating__star', 'fa-regular', 'fa-star');
+              starRatingDiv.appendChild(star);
+            }
+          
+            li.appendChild(starRatingDiv);
+          
+            jokeList.appendChild(li);
+          
+            // Execute the rating function for each li element
+            const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
+            executeRating(ratingStarsInLi, i); // Pass the joke index as a parameter
+          
+            // Set the initial state of stars based on the stored rating
+            const storedRating = joke[i].rating || 0;
+            setInitialStarsState(ratingStarsInLi, storedRating);
+          } // end of for (let i = 0; i < jokes.length; i++)
 
-  let jokeDate = document.createElement('h6');
-  jokeDate.textContent = jokes[i].date;
-  li.append(jokeDate);
+      
+  } catch (error) {
+      console.error('Error fetching dad joke:', error);
+  }
+}
 
-  let jokeText = document.createElement('p');
-  jokeText.textContent = jokes[i].content;
-  li.append(jokeText);
+// Beginning: Add joke to local storage
+function addJokeToLocalStorage(joke) {
+  
+  var jokes = JSON.parse(localStorage.getItem('dadJokes')) || [];
 
+  // Add the current date along with the joke
+  
+  var currentDate = moment().format("MMM Do YYYY")
+  var formattedDate = currentDate // Adjust the date format as needed
 
-  // Dynamically create favorite buttons
-  let buttonFav = document.createElement('button');
-  buttonFav.innerText = 'Add to Favorites';
-  buttonFav.setAttribute('id', `fav-btn-${i}`);
-  buttonFav.addEventListener('click', () =>
-    addFavorite(i))
+  var jokeObject = {
+      date: formattedDate,
+      content: joke,
+  };
 
-  // li.appendChild(buttonFav);
+  jokes.push(jokeObject);
 
-  // Dynamically create send email buttons
-  let buttonEmail = document.createElement('button');
-  buttonEmail.innerText = 'Send Joke as Email';
-  buttonEmail.setAttribute('id', `email-btn-${i}`);
-  buttonEmail.setAttribute('class', 'email-btn js-modal-trigger');
-  buttonEmail.setAttribute('data-target', 'modal-js-example');
-
-  // Wrap buttons in a div for styling
-  let buttonsDiv = document.createElement('div');
-  buttonsDiv.style.display = 'flex'; // Use Flexbox
-  buttonsDiv.style.gap = '10px'; // Optional: adds space between buttons
-
-  buttonsDiv.appendChild(buttonFav);
-  buttonsDiv.appendChild(buttonEmail);
-
-  // Append the div containing both buttons to the li
-  li.appendChild(buttonsDiv);
-
-
-  // Create a div for the star rating and add it to the li
-  let starRatingDiv = document.createElement('div');
-  starRatingDiv.classList.add('rating');
-
-  // Create a new set of five stars for each li
-  for (let j = 0; j < 5; j++) {
-    let star = document.createElement('i');
-    star.classList.add('rating__star', 'fa-regular', 'fa-star');
-    starRatingDiv.appendChild(star);
+  if (jokes.length > 20) {
+      jokes = jokes.slice(jokes.length - 20);
   }
 
-  li.appendChild(starRatingDiv);
-
-  jokeList.appendChild(li);
-
-  // Execute the rating function for each li element
-  const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
-  executeRating(ratingStarsInLi, i); // Pass the joke index as a parameter
-
-  // Set the initial state of stars based on the stored rating
-  const storedRating = jokes[i].rating || 0;
-  setInitialStarsState(ratingStarsInLi, storedRating);
-} // end of for (let i = 0; i < jokes.length; i++)
-
+  localStorage.setItem('dadJokes', JSON.stringify(jokes));
+}
+// End: Add joke to local storage
 
 // Beginning: Favorite items section
 let favoriteList = document.getElementById('favorite-list');
@@ -86,9 +134,9 @@ if (!favoriteList) {
   favoriteList.setAttribute('id', 'favorite-list');
   favContainer.appendChild(favoriteList);
 }
-
+// add favorites
 function addFavorite(jokeIndex) {
-  const selectedJoke = jokes[jokeIndex];
+  const selectedJoke = jokeArray[jokeIndex];
 
   // Check if the joke is not already in the favorite array
   if (!favorite.includes(selectedJoke)) {
@@ -130,12 +178,12 @@ function removeFavorite(jokeIndex) {
   }
 }
 
-function displayFavoriteJokes() {
+function displayFavoriteJokes(jokeArray) {
   favoriteList.innerHTML = ''
 
   favorite.forEach((favJoke, index) => {
     const li = document.createElement('li');
-    li.innerHTML = `${favJoke.date} <br> ${favJoke.content}`;
+    li.innerHTML = `${favJoke.date} <br> ${jokeArray}`;
     favoriteList.appendChild(li);
   });
 }
@@ -154,10 +202,10 @@ const storedFavoriteJokes = JSON.parse(localStorage.getItem('favoriteJokes')) ||
 favorite = storedFavoriteJokes;
 
 // Update UI for existing favorite jokes
-for (let i = 0; i < jokes.length; i++) {
+/*for (let i = 0; i < jokes.length; i++) {
   const isFavorite = storedFavoriteJokes.some(fav => fav.content === jokes[i].content);
   updateFavoriteButton(i, isFavorite);
-}
+}*/
 
 displayFavoriteJokes();
 // End: Favorite items section
