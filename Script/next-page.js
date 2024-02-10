@@ -8,6 +8,7 @@ let jokeArray = [];
 let favContainer = document.getElementById('fav-container');
 let fav = document.getElementById('fav');
 let jokeList = document.getElementById('joke-list');
+let globalJokeTextValue = '';
 // let jokes = JSON.parse(localStorage.getItem('dadJokes'));
 
 
@@ -131,6 +132,21 @@ async function fetchAndDisplayRandomJokes(numJokes) {
       });
     });
     // End: Modal functionality
+
+    // When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
+    const buttons = document.querySelectorAll('.email-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', function (event) {
+        // This function is called when a button is clicked.
+        // Additional logic to ensure it's an email-btn
+        if (event.target.classList.contains('email-btn')) {
+          const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
+          globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
+
+          console.log('Joke text:', globalJokeTextValue);
+        }
+      });
+    });
 
 
   } catch (error) {
@@ -311,21 +327,21 @@ document.querySelectorAll('#joke-list li').forEach((li, index) => {
 
 
 // When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
-let globalJokeTextValue = '';
+// let globalJokeTextValue = '';
 
-const buttons = document.querySelectorAll('.email-btn');
-buttons.forEach(button => {
-  button.addEventListener('click', function (event) {
-    // This function is called when a button is clicked.
-    // Additional logic to ensure it's an email-btn
-    if (event.target.classList.contains('email-btn')) {
-      const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
-      globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
+// const buttons = document.querySelectorAll('.email-btn');
+// buttons.forEach(button => {
+//   button.addEventListener('click', function (event) {
+//     // This function is called when a button is clicked.
+//     // Additional logic to ensure it's an email-btn
+//     if (event.target.classList.contains('email-btn')) {
+//       const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
+//       globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
 
-      console.log('Joke text:', globalJokeTextValue);
-    }
-  });
-});
+//       console.log('Joke text:', globalJokeTextValue);
+//     }
+//   });
+// });
 
 
 // When form is submitted, get jokeTextValue and initiate sendEmail function
