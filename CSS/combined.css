@@ -8,7 +8,6 @@
     background-color: #918FC0;
   }
   
-  
   body {
     font-family: "octin-college", sans-serif;
     font-weight: 600;
@@ -27,8 +26,13 @@
   }
 
   h2 {
+    display: inline-block;
     font-size: 25px;
     color: #ffffff;
+  }
+
+  #fav-h2 {
+    margin-bottom: 24px;
   }
 
   p {
@@ -90,25 +94,74 @@
     border: none;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     cursor: pointer;
-    
-
   }
 
+  #remove-btn {
+    display: block;
+    background-color: #F15B61;
+    padding: 20px;
+    font-family: "octin-college", sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+  }
 
   #email-btn-0:hover, #fav-btn-0:hover, #email-btn-1:hover, #fav-btn-1:hover, #email-btn-2:hover, #fav-btn-2:hover, #email-btn-3:hover, #fav-btn-3:hover, #email-btn-4:hover, #fav-btn-4:hover, #email-btn-5:hover, #fav-btn-5:hover,#email-btn-6:hover, #fav-btn-6:hover, #email-btn-7:hover, #fav-btn-7:hover, #email-btn-8:hover, #fav-btn-8:hover, #email-btn-9:hover, #fav-btn-9:hover, #email-btn-10:hover, #fav-btn-10:hover {
-          background-color: #EF4854;
-          padding: 20px;
-          font-family: "octin-college", sans-serif;
-          color: white;
-          border-radius: 5px;
-          font-size: 20px;
-          border: none;
-          box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-          cursor: pointer;
-    
-    
-        }
+    background-color: #EF4854;
+    padding: 20px;
+    font-family: "octin-college", sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+  }
 
+  #remove-btn:hover {
+    background-color: #EF4854;
+    padding: 20px;
+    font-family: "octin-college", sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+  }
+
+  #refresh-1 {
+    width: 424px;
+    background-color: #465add;
+    padding: 20px;
+    margin-left: 10px;
+    font-family: "octin-college", sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+  }
+
+  #refresh-2 {
+    background-color: #465add;
+    padding: 20px;
+    font-family: "octin-college", sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+  }
+
+  .hide {
+    display: none;
+  }
 
   .rating {
     width: 180px;
@@ -125,15 +178,10 @@
   color: #F2D500;
 }
   
-  /* #fav-container {
-    display: inline;
-    position: absolute;
-    left: 900px;
-    top: 110px;
-  } */
+  #fav-container {
+    width: 576px;
+  } 
 
-  
-  
   .dad-jokes{
       background-color: #918FC0;
       display: flex;
@@ -156,20 +204,20 @@
   
   
   form {
-      border: 2px solid #53526D;
-        background-color: white;
-        border-radius: 20px;
-        width: 90%;
-        max-width: 600px;
-        max-height: 650px;
-        padding-top: 50px;
-        padding-bottom: 50px;
-        padding-left: 30px;
-        padding-right: 30px;
-        margin: auto;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        position: relative;
-        margin-top: 50px;
+    border: 2px solid #53526D;
+    background-color: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 650px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    margin-top: 50px;
   }
   
   label {
