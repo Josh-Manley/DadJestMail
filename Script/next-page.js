@@ -35,6 +35,7 @@ async function fetchAndDisplayRandomJokes(numJokes) {
     // Beginning: display jokes from array, create HTML elements and attributes w/ desired content
     for (let i = 0; i < jokeArray.length; i++) {
       let li = document.createElement('li');
+      li.setAttribute('id', 'joke-li')
       li.setAttribute('joke', jokeArray[i].content);
 
       // Dynamically take jokes from array and display
@@ -70,6 +71,9 @@ async function fetchAndDisplayRandomJokes(numJokes) {
       li.appendChild(buttonsDiv);
 
       jokeList.appendChild(li);
+
+      const refreshBtn = document.getElementById('refresh-btn-li');
+      refreshBtn.before(li);
     } 
     // End: display jokes from array, create HTML elements and attributes w/ desired content
 
@@ -175,6 +179,7 @@ function displayFavoriteJokes() {
   favorite.forEach((favJoke, jokeIndex) => {
     const li = document.createElement('li');
     const btn = document.createElement('button');
+    li.setAttribute('id', 'joke-li');
     btn.innerText = 'Remove from Favorites';
     btn.setAttribute('id', 'remove-btn')
     btn.addEventListener('click', () => removeFavoriteButton(jokeIndex));
