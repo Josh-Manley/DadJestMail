@@ -9,8 +9,6 @@ let favContainer = document.getElementById('fav-container');
 let fav = document.getElementById('fav');
 let jokeList = document.getElementById('joke-list');
 let globalJokeTextValue = '';
-// let jokes = JSON.parse(localStorage.getItem('dadJokes'));
-
 
 // Beginning: function to fetch and display dad jokes
 async function fetchAndDisplayRandomJokes(numJokes) {
@@ -38,14 +36,10 @@ async function fetchAndDisplayRandomJokes(numJokes) {
     for (let i = 0; i < jokeArray.length; i++) {
       let li = document.createElement('li');
       li.setAttribute('joke', jokeArray[i].content);
-      // li.innerHTML = `${jokes[i].date} <br> ${jokes[i].content}`;
-
-      // let jokeDate = document.createElement('h6');
-      // jokeDate.textContent = joke[i].date;
-      // li.append(jokeDate);
 
       // Dynamically take jokes from array and display
       let jokeText = document.createElement('p');
+      jokeText.setAttribute('id', `pTag-${i}`);
       jokeText.textContent = jokeArray[i];
       li.append(jokeText);
 
@@ -55,8 +49,6 @@ async function fetchAndDisplayRandomJokes(numJokes) {
       buttonFav.setAttribute('id', `fav-btn-${i}`);
       buttonFav.addEventListener('click', () =>
         addFavorite(i))
-
-      // li.appendChild(buttonFav);
 
       // Dynamically create send email buttons
       let buttonEmail = document.createElement('button');
@@ -77,31 +69,9 @@ async function fetchAndDisplayRandomJokes(numJokes) {
       // Append the div containing both buttons to the li
       li.appendChild(buttonsDiv);
 
-      // Create a div for the star rating and add it to the li
-      let starRatingDiv = document.createElement('div');
-      starRatingDiv.classList.add('rating');
-
-      // Create a new set of five stars for each li
-      for (let j = 0; j < 5; j++) {
-        let star = document.createElement('i');
-        star.classList.add('rating__star', 'fa-regular', 'fa-star');
-        starRatingDiv.appendChild(star);
-      }
-
-      li.appendChild(starRatingDiv);
-
       jokeList.appendChild(li);
-
-      // Execute the rating function for each li element
-      const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
-      executeRating(ratingStarsInLi, i); // Pass the joke index as a parameter
-
-      // Set the initial state of stars based on the stored rating
-      const storedRating = joke[i].rating || 0;
-      setInitialStarsState(ratingStarsInLi, storedRating);
-    }
+    } 
     // End: display jokes from array, create HTML elements and attributes w/ desired content
-
 
     // Beginning: Modal functionality
     // Functions to open and close a modal
@@ -148,38 +118,11 @@ async function fetchAndDisplayRandomJokes(numJokes) {
       });
     });
 
-
   } catch (error) {
     console.error('Error fetching dad joke:', error);
   }
 }
 // End: function to fetch and display dad jokes
-
-
-// Beginning: Add joke to local storage
-// function addJokeToLocalStorage(joke) {
-
-//   var jokes = JSON.parse(localStorage.getItem('dadJokes')) || [];
-
-//   // Add the current date along with the joke
-
-//   var currentDate = moment().format("MMM Do YYYY")
-//   var formattedDate = currentDate // Adjust the date format as needed
-
-//   var jokeObject = {
-//     date: formattedDate,
-//     content: joke,
-//   };
-
-//   jokes.push(jokeObject);
-
-//   if (jokes.length > 20) {
-//     jokes = jokes.slice(jokes.length - 20);
-//   }
-
-//   localStorage.setItem('dadJokes', JSON.stringify(jokes));
-// }
-// End: Add joke to local storage
 
 // Beginning: Favorite items section
 let favoriteList = document.getElementById('favorite-list');
@@ -189,81 +132,102 @@ if (!favoriteList) {
   favContainer.appendChild(favoriteList);
 }
 // add favorites
-function addFavorite(jokeIndex) {
+function addFavorite(jokeIndex, rating) {
   const selectedJoke = jokeArray[jokeIndex];
+  console.log(selectedJoke);
 
+  let favJokeObject = {
+    content: selectedJoke,
+    rating: rating || 0
+  };
   // Check if the joke is not already in the favorite array
-  if (!favorite.includes(selectedJoke)) {
-    favorite.push(selectedJoke);
-    console.log(`Joke added to favorites: ${selectedJoke.content}`);
+  if (!favorite.some(fav => fav.content === selectedJoke)) {
+    favorite.push(favJokeObject);
+    console.log(`Joke added to favorites: ${selectedJoke}`);
+    console.log(favorite);
 
-    // Optionally, you can update the UI to reflect that the joke is now a favorite
-    // For example, you can change the button text or color
-    updateFavoriteButton(jokeIndex, true);
     displayFavoriteJokes();
-  } else {
-    // Remove the joke from favorites if it's already there
-    const indexToRemove = favorite.findIndex(fav => fav.content === selectedJoke.content);
-    if (indexToRemove !== -1) {
-      favorite.splice(indexToRemove, 1);
-      console.log(`Joke removed from favorites: ${selectedJoke.content}`);
-      updateFavoriteButton(jokeIndex, false);
-      displayFavoriteJokes();
-    }
-  }
 
-  // Save the updated favorite array to localStorage
+      // Save the updated favorite array to localStorage
   localStorage.setItem('favoriteJokes', JSON.stringify(favorite));
+    
+  } else {
+    alert('Already in favorites! 😄');
+  }
 }
 
 // Add event listener for "Remove from Favorites" button
-document.querySelectorAll('.fav-btn-remove').forEach((removeBtn, index) => {
-  removeBtn.addEventListener('click', () => removeFavorite(index));
-});
-
 function removeFavorite(jokeIndex) {
-  if (jokeIndex >= 0 && jokeIndex < favorite.length) {
-    const removedJoke = favorite.splice(jokeIndex, 1)[0];
-    console.log(`Joke removed from favorites: ${removedJoke.content}`);
-    displayFavoriteJokes();
+  const selectedJoke = favorite[jokeIndex];
+  const indexToRemove = favorite.findIndex(fav => fav.content === selectedJoke);
+  if (indexToRemove !== -1) {
+    favorite.splice(indexToRemove, 1);
+    console.log(`Joke removed from favorites: ${selectedJoke}`);
     localStorage.setItem('favoriteJokes', JSON.stringify(favorite));
-  } else {
-    console.error("Invalid jokeIndex or favorite structure.");
+    //updateFavoriteButton(jokeIndex, false);
+    displayFavoriteJokes();
   }
 }
 
-function displayFavoriteJokes(jokeArray) {
-  favoriteList.innerHTML = ''
+function displayFavoriteJokes() {
+  favoriteList.innerHTML = '';
 
-  favorite.forEach((favJoke, index) => {
+  favorite.forEach((favJoke, jokeIndex) => {
     const li = document.createElement('li');
-    li.innerHTML = `${favJoke}`;
+    const btn = document.createElement('button');
+    btn.innerText = 'Remove from Favorites';
+    btn.setAttribute('id', 'remove-btn')
+    btn.addEventListener('click', () => removeFavoriteButton(jokeIndex));
+    console.log(favJoke);
+    
+    // Create a text node for the joke content and append it to the li
+    const textNode = document.createTextNode(favJoke.content);
+    li.appendChild(textNode);
+
+    li.appendChild(btn);
+   
+    // Create a div for the star rating and add it to the li
+    let starRatingDiv = document.createElement('div');
+    starRatingDiv.classList.add('rating');
+
+    // Create a new set of five stars for each li
+    for (let j = 0; j < 5; j++) {
+      let star = document.createElement('i');
+      star.classList.add('rating__star', 'fa-regular', 'fa-star');
+      starRatingDiv.appendChild(star);
+    }
+
+    li.appendChild(starRatingDiv);
+
+    // Execute the rating function for each favorite joke after they are displayed
+      const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
+      executeRating(ratingStarsInLi, jokeIndex, favorite);
+  
+    // Set the initial state of stars based on the stored rating
+    const storedRating = favJoke.rating || 0;
+
+    setInitialStarsState(ratingStarsInLi, storedRating);
+
     favoriteList.appendChild(li);
+    // saveRatingToLocalStorage(jokeIndex, favorite);
   });
 }
 
-function updateFavoriteButton(jokeIndex, Favorite) {
-  const favBtn = document.getElementById(`fav-btn-${jokeIndex}`);
-  if (favBtn) {
-    favBtn.innerText = Favorite ? 'Remove from Favorites' : 'Add to Favorites';
-    favBtn.classList.toggle('fave-btn-remove', Favorite);
-    // Optionally, you can also change the button color or style
+function removeFavoriteButton(jokeIndex) {
+  const joke = favorite[jokeIndex].content;
+  const jokeIndexToRemove = favorite.findIndex(fav => fav.content === joke);
+  if (jokeIndexToRemove !== -1) {
+    favorite.splice(jokeIndexToRemove, 1);
+    console.log(`Joke removed from favorites: ${joke}`);
+    localStorage.setItem('favoriteJokes', JSON.stringify(favorite));
+    //updateFavoriteButton(jokeIndex, false);
+    displayFavoriteJokes();
+  } else {
+    console.error(`Joke with content '${joke}' not found in favorites.`);
   }
 }
 
-// Optionally, you can also initialize the UI based on the existing favorites
-const storedFavoriteJokes = JSON.parse(localStorage.getItem('favoriteJokes')) || [];
-favorite = storedFavoriteJokes;
-
-// Update UI for existing favorite jokes
-/*for (let i = 0; i < jokes.length; i++) {
-  const isFavorite = storedFavoriteJokes.some(fav => fav.content === jokes[i].content);
-  updateFavoriteButton(i, isFavorite);
-}*/
-
-displayFavoriteJokes();
 // End: Favorite items section
-
 
 // Beginning: code for star rating
 function setInitialStarsState(stars, rating) {
@@ -280,13 +244,14 @@ function setInitialStarsState(stars, rating) {
   }
 }
 
-function executeRating(stars, jokeIndex) {
+function executeRating(stars, jokeIndex, favorites) {
   const starClassActive = "fa-solid";
   const starClassInactive = "fa-regular";
   const starsLength = stars.length;
 
   stars.map((star, index) => {
     star.onclick = () => {
+      console.log(`Clicked on star ${index + 1} for joke ${jokeIndex}`);
       for (let i = 0; i <= index; i++) {
         stars[i].classList.remove(starClassInactive);
         stars[i].classList.add(starClassActive);
@@ -297,52 +262,45 @@ function executeRating(stars, jokeIndex) {
         stars[i].classList.add(starClassInactive);
       }
 
+      favorites[jokeIndex].rating = index + 1;
+
       // Save the rating to local storage
-      const rating = index + 1;
-      saveRatingToLocalStorage(jokeIndex, rating);
+        saveRatingToLocalStorage(jokeIndex, index + 1, favorites);
     };
   });
 }
 
-function saveRatingToLocalStorage(jokeIndex, rating) {
-  let storedJokes = JSON.parse(localStorage.getItem('dadJokes')) || [];
+function saveRatingToLocalStorage(jokeIndex, rating, favorites) {
+  let storedFavorites = JSON.parse(localStorage.getItem('favoriteJokes')) || [];
 
-  console.log("storedJokes:", storedJokes);
-  console.log("jokeIndex:", jokeIndex);
+  if (jokeIndex >= 0 && jokeIndex < favorites.length) {
+    const selectedJoke = favorites[jokeIndex];
+    const existingFavoriteIndex = storedFavorites.findIndex(fav => fav.content === selectedJoke.content);
 
-  if (jokeIndex >= 0 && jokeIndex < storedJokes.length) {
-    storedJokes[jokeIndex].rating = rating;
-    localStorage.setItem('dadJokes', JSON.stringify(storedJokes));
+    if (existingFavoriteIndex !== -1) {
+      storedFavorites[existingFavoriteIndex].rating = rating;
+      localStorage.setItem('favoriteJokes', JSON.stringify(storedFavorites));
+    } else {
+      console.error("Selected joke not found in stored favorites.");
+    }
   } else {
-    console.error("Invalid jokeIndex or storedJokes structure.");
+    console.error("Invalid jokeIndex or favorites structure.");
   }
 }
-// Execute the rating function for each li element
-document.querySelectorAll('#joke-list li').forEach((li, index) => {
+
+// Ensure that the localStorage is loaded before displaying favorite jokes
+const storedFavoriteJokes = JSON.parse(localStorage.getItem('favoriteJokes')) || [];
+favorite = storedFavoriteJokes;
+
+// Display favorite jokes with star ratings
+displayFavoriteJokes();
+
+// Execute the rating function for each favorite joke after they are displayed
+document.querySelectorAll('#favorite-list li').forEach((li, index) => {
   const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
-  executeRating(ratingStarsInLi, index);
+  executeRating(ratingStarsInLi, index, favorite);
 });
 // End: code for star rating
-
-
-
-// When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
-// let globalJokeTextValue = '';
-
-// const buttons = document.querySelectorAll('.email-btn');
-// buttons.forEach(button => {
-//   button.addEventListener('click', function (event) {
-//     // This function is called when a button is clicked.
-//     // Additional logic to ensure it's an email-btn
-//     if (event.target.classList.contains('email-btn')) {
-//       const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
-//       globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
-
-//       console.log('Joke text:', globalJokeTextValue);
-//     }
-//   });
-// });
-
 
 // When form is submitted, get jokeTextValue and initiate sendEmail function
 var form = document.getElementById('emailForm');
@@ -373,7 +331,6 @@ form.addEventListener('submit', function (event) {
   console.log(currentTime)
   console.log(scheduledTime)
 
-
   // Check if the scheduled time is in the past, if so, present alert
   if (scheduledTime < currentTime) {
     alert('Please select a current or future time for sending the email.');
@@ -394,7 +351,6 @@ form.addEventListener('submit', function (event) {
   console.log('Email will be sent at:', new Date(scheduledTime));
 });
 // End: When "Send Email" is clicked, get form values, initiate isValidEmail function, and determine when to send email
-
 
 // Beginning: Ensure a valid email address is entered
 function isValidEmail(email) {
@@ -423,4 +379,16 @@ function sendEmail(email, joke) {
 };
 // End: Send Email
 
-
+//function to refresh page when refresh button is clicked
+function refreshPg() {
+  window.location.reload();
+}
+window.addEventListener('load', () => {
+  // timeout for refresh button delay
+  window.setTimeout(() => {
+    const elements = document.querySelectorAll('.hide');
+    elements.forEach(element => {
+      element.classList.remove('hide');
+    });
+  }, 1300);
+});
