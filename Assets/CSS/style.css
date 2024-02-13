@@ -36,19 +36,16 @@
     margin-bottom: 24px;
   }
 
+
+
+
   p {
-    font-family: "Avenir-Next";
+    font-family: "Lato";
     color: white;
     padding: 10px;
     font-size: 20px;
   }
 
-  /* .flex-column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 10px;
-  } */
 
   .content-wrapper {
     display: grid;
@@ -57,12 +54,6 @@
     padding-top: 5%;
     padding-bottom: 2%;
 }
-
-/* .content-wrapper {
-  display: flex;
-  flex-direction: row;
-  padding: 5px;
-} */
 
   #joke-list {
     width: 40rem;
@@ -74,12 +65,12 @@
     background-color: rgb(34, 194, 186);
     border-radius: 0.5rem;
     margin-top: 0.75rem;
-    padding: 0.5rem;
-    font-family: "Avenir-Next";  
+    padding: 0.5rem; 
     color: white;
     font-size: 20px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     margin-bottom: 10px;
+    font-family: "Lato";
   }
 
   #refresh-btn-li {
