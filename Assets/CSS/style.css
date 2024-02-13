@@ -46,12 +46,6 @@
     font-size: 20px;
   }
 
-  /* .flex-column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 10px;
-  } */
 
   .content-wrapper {
     display: grid;
@@ -60,12 +54,6 @@
     padding-top: 5%;
     padding-bottom: 2%;
 }
-
-/* .content-wrapper {
-  display: flex;
-  flex-direction: row;
-  padding: 5px;
-} */
 
   #joke-list {
     width: 40rem;
