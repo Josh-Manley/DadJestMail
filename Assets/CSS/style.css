@@ -267,8 +267,8 @@
     text-align: center;
   }
 
-    button:hover {
-      background-color: #494960;
+  button:hover {
+      background-color: #EF4854;
     }
   
   input:invalid {
