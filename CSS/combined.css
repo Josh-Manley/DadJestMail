@@ -6,6 +6,7 @@
   
   html {
     background-color: #918FC0;
+    scroll-behavior: smooth;
   }
   
   body {
@@ -69,7 +70,7 @@
     font-size: 1.5rem;
   }
 
-  li {
+  #joke-li {
     background-color: rgb(34, 194, 186);
     border-radius: 0.5rem;
     margin-top: 0.75rem;
@@ -79,6 +80,10 @@
     font-size: 20px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     margin-bottom: 10px;
+  }
+
+  #refresh-btn-li {
+    width: 40rem;
   }
 
   #email-btn-0,  #fav-btn-0, #email-btn-1, #fav-btn-1, #email-btn-2,
@@ -141,19 +146,31 @@
     font-family: "octin-college", sans-serif;
     color: white;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 25px;
     border: none;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     cursor: pointer;
   }
 
   #refresh-2 {
+    width: 40rem;
     background-color: #465add;
     padding: 20px;
     font-family: "octin-college", sans-serif;
     color: white;
     border-radius: 5px;
     font-size: 20px;
+    border: none;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+  }
+
+  #refresh-1:hover, #refresh-2:hover {
+    background-color: #2e3fab;
+    padding: 20px;
+    font-family: "octin-college", sans-serif;
+    color: white;
+    border-radius: 5px;
     border: none;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     cursor: pointer;
@@ -296,4 +313,9 @@
       background-color: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(3px);
       z-index: 5;
+    }
+
+    footer {
+      margin: 30px;
+      font-size: 30px;
     }
