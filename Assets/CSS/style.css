@@ -36,8 +36,11 @@
     margin-bottom: 24px;
   }
 
+
+
+
   p {
-    font-family: "Avenir-Next";
+    font-family: "Lato";
     color: white;
     padding: 10px;
     font-size: 20px;
@@ -80,6 +83,7 @@
     font-size: 20px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     margin-bottom: 10px;
+    font-family: "Lato";
   }
 
   #refresh-btn-li {
