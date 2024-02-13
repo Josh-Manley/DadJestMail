@@ -86,7 +86,7 @@
     width: 40rem;
   }
 
-  #email-btn-0,  #fav-btn-0, #email-btn-1, #fav-btn-1, #email-btn-2,
+  .email-btn, #email-btn-0,  #fav-btn-0, #email-btn-1, #fav-btn-1, #email-btn-2,
   #fav-btn-2, #email-btn-3, #fav-btn-3, #email-btn-4, #fav-btn-4, #email-btn-5,
   #fav-btn-5,  #email-btn-6, #fav-btn-6, #email-btn-7, #fav-btn-7, #email-btn-8,
   #fav-btn-8, #email-btn-9, #fav-btn-9, #email-btn-10, #fav-btn-10{
@@ -313,3 +313,5 @@
     footer a {
       color: white;
     }
+
+    

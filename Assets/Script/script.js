@@ -71,61 +71,116 @@ async function fetchAndDisplayRandomJokes(numJokes) {
       li.appendChild(buttonsDiv);
 
       jokeList.appendChild(li);
-
-
-    } 
+    }
     // End: display jokes from array, create HTML elements and attributes w/ desired content
 
     // Beginning: Modal functionality
     // Functions to open and close a modal
-    function openModal($el) {
-      $el.classList.add('is-active');
-    }
+    // function openModal($el) {
+    //   $el.classList.add('is-active');
+    // }
 
-    function closeModal($el) {
-      $el.classList.remove('is-active');
-    }
+    // function closeModal($el) {
+    //   $el.classList.remove('is-active');
+    // }
 
-    // Add a click event on buttons to open a specific modal
-    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-      const modal = $trigger.dataset.target;
-      const $target = document.getElementById(modal);
+    // // Add a click event on buttons to open a specific modal
+    // (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    //   const modal = $trigger.dataset.target;
+    //   const $target = document.getElementById(modal);
 
-      $trigger.addEventListener('click', () => {
-        openModal($target);
-      });
-    });
+    //   $trigger.addEventListener('click', () => {
+    //     openModal($target);
+    //   });
+    // });
 
-    // Add a click event on various child elements to close the parent modal
-    (document.querySelectorAll('.modal-background, .modal-close') || []).forEach(($close) => {
-      const $target = $close.closest('.modal');
+    // // Add a click event on various child elements to close the parent modal
+    // (document.querySelectorAll('.modal-background, .modal-close') || []).forEach(($close) => {
+    //   const $target = $close.closest('.modal');
 
-      $close.addEventListener('click', () => {
-        closeModal($target);
-      });
-    });
+    //   $close.addEventListener('click', () => {
+    //     closeModal($target);
+    //   });
+    // });
     // End: Modal functionality
 
-    // When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
-    const buttons = document.querySelectorAll('.email-btn');
-    buttons.forEach(button => {
-      button.addEventListener('click', function (event) {
-        // This function is called when a button is clicked.
-        // Additional logic to ensure it's an email-btn
-        if (event.target.classList.contains('email-btn')) {
-          const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
-          globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
+    grabJokeText();
 
-          console.log('Joke text:', globalJokeTextValue);
-        }
-      });
-    });
+    // When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
+    // const buttons = document.querySelectorAll('.email-btn');
+    // buttons.forEach(button => {
+    //   button.addEventListener('click', function (event) {
+    //     // This function is called when a button is clicked.
+    //     // Additional logic to ensure it's an email-btn
+    //     if (event.target.classList.contains('email-btn')) {
+    //       const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
+    //       globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
+
+    //       console.log('Joke text:', globalJokeTextValue);
+    //     }
+    //   });
+    // });
 
   } catch (error) {
     console.error('Error fetching dad joke:', error);
   }
 }
 // End: function to fetch and display dad jokes
+
+// Beginning: When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
+function grabJokeText() {
+  // Beginning: Modal functionality
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+
+    // Reset the form within the modal
+    var form = document.getElementById('emailForm');
+    if (form) {
+      form.reset(); // This resets all form fields to their default values
+    }
+  };
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+  // End: Modal functionality
+
+  const buttons = document.querySelectorAll('.email-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', function (event) {
+      // This function is called when a button is clicked.
+      // Additional logic to ensure it's an email-btn
+      if (event.target.classList.contains('email-btn')) {
+        const jokeTextP = event.target.closest('li').querySelector('p'); // Selecting the <p> element directly now
+        globalJokeTextValue = jokeTextP ? jokeTextP.textContent : 'Joke not found'; // Use textContent to get just the text
+
+        console.log('Joke text:', globalJokeTextValue);
+      }
+    });
+  });
+};
+// End: When "Send Joke as Email" is clicked, capture the text value from the p tag that triggered event and save for sendEmail function
+
 
 // Beginning: Favorite items section
 let favoriteList = document.getElementById('favorite-list');
@@ -151,9 +206,9 @@ function addFavorite(jokeIndex, rating) {
 
     displayFavoriteJokes();
 
-      // Save the updated favorite array to localStorage
-  localStorage.setItem('favoriteJokes', JSON.stringify(favorite));
-    
+    // Save the updated favorite array to localStorage
+    localStorage.setItem('favoriteJokes', JSON.stringify(favorite));
+
   } else {
     alert('Already in favorites! 😄');
   }
@@ -183,13 +238,35 @@ function displayFavoriteJokes() {
     btn.setAttribute('id', 'remove-btn')
     btn.addEventListener('click', () => removeFavoriteButton(jokeIndex));
     console.log(favJoke);
-    
-    // Create a text node for the joke content and append it to the li
-    const textNode = document.createTextNode(favJoke.content);
-    li.appendChild(textNode);
 
-    li.appendChild(btn);
-   
+    let jokeFavText = document.createElement('p');
+    jokeFavText.textContent = favJoke.content;
+
+    li.appendChild(jokeFavText);
+
+    // Create a text node for the joke content and append it to the li
+    // const textNode = document.createTextNode(favJoke.content);
+    // li.appendChild(textNode);
+    // li.appendChild(btn);
+
+    // Dynamically create send email buttons
+    let buttonFavEmail = document.createElement('button');
+    buttonFavEmail.innerText = 'Send Joke as Email';
+    buttonFavEmail.setAttribute('class', 'email-btn js-modal-trigger');
+    buttonFavEmail.setAttribute('data-target', 'modal-js-example');
+
+    // // Wrap buttons in a div for styling
+    let buttonsFavDiv = document.createElement('div');
+    buttonsFavDiv.style.display = 'flex';
+    buttonsFavDiv.style.gap = '10px';
+
+    // // Append buttons to div
+    buttonsFavDiv.appendChild(btn);
+    buttonsFavDiv.appendChild(buttonFavEmail);
+
+    // // Append the div containing both buttons to the li
+    li.appendChild(buttonsFavDiv);
+
     // Create a div for the star rating and add it to the li
     let starRatingDiv = document.createElement('div');
     starRatingDiv.classList.add('rating');
@@ -204,9 +281,9 @@ function displayFavoriteJokes() {
     li.appendChild(starRatingDiv);
 
     // Execute the rating function for each favorite joke after they are displayed
-      const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
-      executeRating(ratingStarsInLi, jokeIndex, favorite);
-  
+    const ratingStarsInLi = [...li.querySelectorAll('.rating .rating__star')];
+    executeRating(ratingStarsInLi, jokeIndex, favorite);
+
     // Set the initial state of stars based on the stored rating
     const storedRating = favJoke.rating || 0;
 
@@ -215,6 +292,7 @@ function displayFavoriteJokes() {
     favoriteList.appendChild(li);
     // saveRatingToLocalStorage(jokeIndex, favorite);
   });
+  grabJokeText();
 }
 
 function removeFavoriteButton(jokeIndex) {
@@ -269,7 +347,7 @@ function executeRating(stars, jokeIndex, favorites) {
       favorites[jokeIndex].rating = index + 1;
 
       // Save the rating to local storage
-        saveRatingToLocalStorage(jokeIndex, index + 1, favorites);
+      saveRatingToLocalStorage(jokeIndex, index + 1, favorites);
     };
   });
 }
@@ -365,11 +443,11 @@ function isValidEmail(email) {
 // End: Ensure a valid email address is entered
 
 // Beginning: Send Email
-emailjs.init('e4IMeDjiTLqb2QzFb'); //Your EmailJS user ID
+emailjs.init('OSTC9CDijl7B2xwUF'); //Your EmailJS user ID
 
 function sendEmail(email, joke) {
   // Use EmailJS to send email
-  emailjs.send('service_wv4ctg4', 'template_036nw4v', {
+  emailjs.send('service_q71jh2q', 'template_ax0nhz9', {
     to_email: email,
     joke_content: joke
   })
