@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Past Jokes</title>
+  <title>Dad Jest Mail</title>
+  <link rel="icon" type="image/png" href="Assets/favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://use.typekit.net/oaa8vzq.css">
-  <link rel="stylesheet" href="./CSS/combined.css">
+  <link rel="stylesheet" href="./Assets/CSS/style.css">
 </head>
 
 <body>
@@ -21,7 +22,7 @@
       <ul id="joke-list">
         <h2>Random Joke Log: </h2>
         <button id="refresh-1" class="hide" onclick="refreshPg()">refresh</button>
-        <li id="refresh-btn-li"><button id="refresh-2" class="hide" onclick="refreshPg()">refresh</button></li>
+        <li id="refresh-btn-li"></li>
       </ul>
 
       <div id="fav-container">
@@ -68,7 +69,7 @@
               </div>
 
             <div class="field">
-              <label for="email">Recipiant Email:</label>
+              <label for="email">Recipient Email:</label>
               <div class="control has-icons-left has-icons-right">
                 <input class="input" type="email" placeholder="Email" value="" id="email">
                 <span class="icon is-small is-left">
@@ -108,7 +109,7 @@
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="https://kit.fontawesome.com/9355b70bee.js" crossorigin="anonymous"></script>
-  <script src="./Script/next-page.js"></script>
+  <script src="./Assets/Script/script.js"></script>
 </body>
 
 </html>

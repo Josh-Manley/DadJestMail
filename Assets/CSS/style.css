@@ -140,8 +140,8 @@
 
   #refresh-1 {
     width: 424px;
-    background-color: #465add;
-    padding: 20px;
+    background-color: #F15B61;
+    padding: 10px;
     margin-left: 10px;
     font-family: "octin-college", sans-serif;
     color: white;
@@ -152,22 +152,11 @@
     cursor: pointer;
   }
 
-  #refresh-2 {
-    width: 40rem;
-    background-color: #465add;
-    padding: 20px;
-    font-family: "octin-college", sans-serif;
-    color: white;
-    border-radius: 5px;
-    font-size: 20px;
-    border: none;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    cursor: pointer;
-  }
 
-  #refresh-1:hover, #refresh-2:hover {
-    background-color: #2e3fab;
-    padding: 20px;
+
+  #refresh-1:hover {
+    background-color: #EF4854;
+    padding: 10px;
     font-family: "octin-college", sans-serif;
     color: white;
     border-radius: 5px;
@@ -318,4 +307,9 @@
     footer {
       margin: 30px;
       font-size: 30px;
+    
+    }
+
+    footer a {
+      color: white;
     }

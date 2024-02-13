@@ -72,8 +72,7 @@ async function fetchAndDisplayRandomJokes(numJokes) {
 
       jokeList.appendChild(li);
 
-      const refreshBtn = document.getElementById('refresh-btn-li');
-      refreshBtn.before(li);
+
     } 
     // End: display jokes from array, create HTML elements and attributes w/ desired content
 
