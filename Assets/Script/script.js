@@ -444,12 +444,15 @@ function isValidEmail(email) {
 
 // Beginning: Send Email
 emailjs.init('OSTC9CDijl7B2xwUF'); //Your EmailJS user ID
-
+let sender = document.getElementById('sender-name');
+let recipient = document.getElementById('to-name')
 function sendEmail(email, joke) {
   // Use EmailJS to send email
   emailjs.send('service_q71jh2q', 'template_ax0nhz9', {
     to_email: email,
-    joke_content: joke
+    joke_content: joke,
+    to_name: recipient.value,
+    from_name: sender.value
   })
     .then(function (response) {
       console.log('Email sent:', response);
