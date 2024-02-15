@@ -49,7 +49,9 @@ Regularly update the joke database to keep content fresh and engaging.
 Collect user feedback and make improvements based on suggestions and trends in joke popularity.
 
 ## Installation
-[linkToDeployedPage]()
+[linkToDeployedPage](https://josh-manley.github.io/DadJestMail/)
+
+[presentationLink](https://docs.google.com/presentation/d/e/2PACX-1vRt7E1HDNs9FvaMr1oM0DUirIl-ukN6R0EwA5UxrnlT9IK3Ur3TwHvDZp9x8WzY5-ml-NgqNeZKdTwm/pub?start=false&loop=false&delayms=3000)
 
 ## Usage
 ![Webpage titled "Dad Jest Mail" featuring a log of random dad jokes, with options to add each joke to the "Favorites" section and to send the joke as an email. When a joke has been added to the Favorites section, options to rate each joke, remove it from favorites, and send it as an email will be presented.](https://github.com/Josh-Manley/DadJestMail/blob/main/Assets/Images/Dad-Jest-Mail-Functionality.gif)
